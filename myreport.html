@@ -1,0 +1,15 @@
+<!Doctype html>
+<html>
+<head lang="en">
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+</head>
+<body>
+        <h2>{{ title }}</h2>
+        {{ truck_miles }}
+        {{ truck_table }}
+        {%for picture in pictures%}
+                <img src="{{ picture }}">
+        {% endfor %}
+</body>
+</html>
