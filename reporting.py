@@ -29,14 +29,14 @@ def summarize(df):
     """
     
     summary = pd.DataFrame(index = df.index)
+    num_dates = float(len(df.columns))
     
     # number is in minutes so divide by 60
     summary['Hours Worked in Time Range'] = df.sum(axis=1)/60.
     summary['Days Utilized'] = (df[df.columns] > 0).sum(1)
     
-    # 261 working days per year on average
     summary['Percentage of Working Days Utilized'] = \
-        summary['Days Utilized'].apply(lambda x: x*261/100.)
+        summary['Days Utilized'].apply(lambda x: x/num_dates*100.)
     
     summary['Average Hours Worked per Utilized Day'] = \
         summary['Hours Worked in Time Range']/summary['Days Utilized']

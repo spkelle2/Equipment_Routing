@@ -1,11 +1,11 @@
 import time
-from iterate import solve_hub
+from iterate import solve_variation
 
 start_time = time.time()
 
 # format 'yyyy-mm-dd'
-start_date = '2015-01-01'
-end_date = '2015-12-31'
+start_date = '2015-02-03'
+end_date = '2015-02-12'
 
 # travel rate in miles per minutes 
 travel_rate = 50/60.
@@ -24,21 +24,21 @@ fleet_upper_bound = 12
 window = 2
 
 # location of the excel file containing all of the demand data
-directory_name = '/mnt/c/Users/Sean/Documents/School/Senior Year/GE 494/data/'
-file_name = 'Project_Info_Extra_Handles.xlsx'
+directory_name = '/mnt/c/Users/Sean/Documents/School/Senior_Year/GE_494/package/'
+file_name = 'Project_Info_Example.xlsx'
 file_path = directory_name + file_name
 
 chicago_variations = ['Chicago Base', 'Chicago + Milwaukee', 'Chicago + Peoria', 
 		'Chicago + Milwaukee and Peoria']
 
-kansas_city_variations = ['KC Base', 'KC + Lincoln', 'KC + Wichita',
-		'KC + Lincoln and Wichita'] 
+topeka_variations = ['Topeka Base', 'Topeka + Lincoln', 'Topeka + Wichita',
+		'Topeka + Lincoln and Wichita'] 
 
 # city name in quotes must match the city name in
 # "[city name] coordinates" sheet in excel that we read from 
 regions = {
 	'Chicago': chicago_variations,
-	'Kansas City': kansas_city_variations
+	'Topeka': topeka_variations
 }
 
 fixed_parameters = {
