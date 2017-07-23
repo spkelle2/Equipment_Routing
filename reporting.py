@@ -334,6 +334,3 @@ def make_report(data, variation, fixed_parameters):
     # pdfkit gives better results so use when you can
     #pdfkit.from_string(html_out, '%s%s_report.pdf' % (directory_name, variation))
     HTML('out.html').write_pdf('%s%s_report.pdf' % (directory_name, variation))
-
-
-

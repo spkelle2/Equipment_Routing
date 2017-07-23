@@ -23,7 +23,7 @@ fleet_upper_bound = 12
 # number of possible days on which each drop-off/pick-up can be made
 window = 2
 
-# location of the excel file containing all of the demand data
+# location of the excel file containing all of the demand data and where report is output
 directory_name = '/Users/skelley/Documents/personal/senior_design/Equipment_Routing/data'
 file_name = 'Project_Info_Example.xlsx'
 file_path = directory_name + file_name
