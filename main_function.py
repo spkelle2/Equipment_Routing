@@ -4,8 +4,8 @@ from iterate import solve_hub
 start_time = time.time()
 
 # format 'yyyy-mm-dd'
-start_date = '2015-01-01'
-end_date = '2015-12-31'
+start_date = '2015-02-02'
+end_date = '2015-02-06'
 
 # travel rate in miles per minutes 
 travel_rate = 50/60.
@@ -24,8 +24,8 @@ fleet_upper_bound = 12
 window = 2
 
 # location of the excel file containing all of the demand data
-directory_name = '/mnt/c/Users/Sean/Documents/School/Senior Year/GE 494/data/'
-file_name = 'Project_Info_Extra_Handles.xlsx'
+directory_name = '~/Documents/personal/senior_design/data'
+file_name = 'Project_Info_Example.xlsx'
 file_path = directory_name + file_name
 
 chicago_variations = ['Chicago Base', 'Chicago + Milwaukee', 'Chicago + Peoria', 
