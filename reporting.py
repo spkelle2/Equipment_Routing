@@ -5,7 +5,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from jinja2 import Environment, FileSystemLoader
-import pdfkit
+from weasyprint import HTML
 
 # compute summary statistics for each equipment hauler
 # hours_df (how much each hauler works each day) is passed in as df when run
@@ -29,14 +29,14 @@ def summarize(df):
     """
     
     summary = pd.DataFrame(index = df.index)
+    num_dates = float(len(df.columns))
     
     # number is in minutes so divide by 60
     summary['Hours Worked in Time Range'] = df.sum(axis=1)/60.
     summary['Days Utilized'] = (df[df.columns] > 0).sum(1)
     
-    # 261 working days per year on average
     summary['Percentage of Working Days Utilized'] = \
-        summary['Days Utilized'].apply(lambda x: x*261/100.)
+        summary['Days Utilized'].apply(lambda x: x/num_dates*100.)
     
     summary['Average Hours Worked per Utilized Day'] = \
         summary['Hours Worked in Time Range']/summary['Days Utilized']
@@ -181,7 +181,10 @@ def equipment_graph_maker(demand_df, variation, directory_name, plotlist):
     # save it and append to plot list
     graph_location = '%s%s Equipment Set Utilization.png' % (directory_name,
         variation)
-    
+
+    # patch for saving on mac -- replace spaces with underscores
+    #graph_location = graph_location.replace(' ', '_')
+
     plt.savefig(graph_location)
     plotlist.append(graph_location)
 
@@ -200,7 +203,10 @@ def equipment_graph_maker(demand_df, variation, directory_name, plotlist):
     # save it and append to plot list
     graph_location = '%s%s Cumulative Equipment Set Utilization.png' % (directory_name,
         variation)
-    
+ 
+    # patch for saving on mac -- replace spaces with underscores
+    #graph_location = graph_location.replace(' ', '_')
+   
     plt.savefig(graph_location)
     plotlist.append(graph_location)
 
@@ -252,6 +258,9 @@ def hauler_graph_maker(hours_df, index, plotlist, directory_name, variation):
     fig.autofmt_xdate()
     fig.suptitle('Truck %s Utilization by Day (Weekdays Only)' % (index))
     graph_location = '%s%s Truck%s.png' % (directory_name, variation, index)
+  
+    # patch for saving on mac -- replace spaces with underscores
+    #graph_location = graph_location.replace(' ', '_')
     plt.savefig(graph_location)
     
     # add where we saved this plot to the list of plots to add to the report
@@ -317,5 +326,11 @@ def make_report(data, variation, fixed_parameters):
     # render html for our report with our variables in place
     html_out = template.render(template_vars)
 
-    # convert html to pdf and save
-    pdfkit.from_string(html_out, '%s%s Report.pdf' % (directory_name, variation))
+    # save the html to a file if you cannot use pdfkit
+    with open("out.html", "wb") as fh:
+        fh.write(html_out)
+
+    # convert html to pdf and save -- first line for pdfkit, second for weasyprint
+    # pdfkit gives better results so use when you can
+    #pdfkit.from_string(html_out, '%s%s_report.pdf' % (directory_name, variation))
+    HTML('out.html').write_pdf('%s%s_report.pdf' % (directory_name, variation))

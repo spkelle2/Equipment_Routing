@@ -1,5 +1,5 @@
 import time
-from iterate import solve_hub
+from iterate import solve_variation
 
 start_time = time.time()
 
@@ -23,22 +23,22 @@ fleet_upper_bound = 12
 # number of possible days on which each drop-off/pick-up can be made
 window = 2
 
-# location of the excel file containing all of the demand data
-directory_name = '~/Documents/personal/senior_design/data'
+# location of the excel file containing all of the demand data and where report is output
+directory_name = '/Users/skelley/Documents/personal/senior_design/Equipment_Routing/data'
 file_name = 'Project_Info_Example.xlsx'
 file_path = directory_name + file_name
 
 chicago_variations = ['Chicago Base', 'Chicago + Milwaukee', 'Chicago + Peoria', 
 		'Chicago + Milwaukee and Peoria']
 
-kansas_city_variations = ['KC Base', 'KC + Lincoln', 'KC + Wichita',
-		'KC + Lincoln and Wichita'] 
+topeka_variations = ['Topeka Base', 'Topeka + Lincoln', 'Topeka + Wichita',
+		'Topeka + Lincoln and Wichita'] 
 
 # city name in quotes must match the city name in
 # "[city name] coordinates" sheet in excel that we read from 
 regions = {
 	'Chicago': chicago_variations,
-	'Kansas City': kansas_city_variations
+	'Topeka': topeka_variations
 }
 
 fixed_parameters = {

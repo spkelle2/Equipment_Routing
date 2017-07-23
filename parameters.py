@@ -112,7 +112,7 @@ def make_travel_matrix(daily_demand, file_path, region, travel_rate, day_length,
 		How many miles the route from location i to location j is
 	"""
 	
-	daily_coords = pd.read_excel(project_info, sheetname='%s Coordinates' % region)
+	daily_coords = pd.read_excel(file_path, sheetname='%s Coordinates' % region)
 	locations = daily_demand.index.tolist()
 	
 	# 9998 and 9999 are ID's for our hubs (matched to excel spreadsheet)
